@@ -69,7 +69,7 @@ export default function DeliveryMap({
           <Popup closeButton={false}>
             <span className="flex flex-col items-center justify-center gap-2 w-full">
               <Car size={32} className="text-green-500" />
-              <span className="text-base font-semibold">Agent</span>
+              <span className="text-base font-semibold">Driver</span>
             </span>
           </Popup>
         </Marker>
