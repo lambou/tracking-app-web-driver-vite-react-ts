@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply w-screen min-h-screen overflow-x-hidden flex flex-col;
+}
+
+#root {
+  @apply flex-auto flex flex-col;
+}
