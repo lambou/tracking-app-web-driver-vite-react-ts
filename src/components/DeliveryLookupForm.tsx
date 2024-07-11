@@ -1,11 +1,10 @@
 import IDelivery from "@/interfaces/IDelivery";
-import debounce from "lodash.debounce";
 import { X } from "lucide-react";
 import { HTMLAttributes, useCallback, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { cn, fetchJson } from "../lib/utils";
 import Button from "./ui/Button";
 import Input from "./ui/Input";
-import toast from "react-hot-toast";
 
 export type DeliveryLookupFormProps = HTMLAttributes<HTMLDivElement> & {
   onLoaded?: (delivery?: IDelivery) => void;
@@ -20,24 +19,21 @@ export default function DeliveryLookupForm({
   const [entityId, setEntityId] = useState<string>();
   const [loading, setLoading] = useState<boolean>(false);
 
-  const loadDeliveryById = useCallback(
-    debounce(async (inputId: string) => {
-      setLoading(true);
-      await fetchJson<IDelivery>(
-        `${import.meta.env.VITE_APP_API_URL}/api/delivery/${inputId}`,
-      )
-        .then((data) => {
-          setDelivery(data);
-        })
-        .catch(() => {
-          toast.error("No delivery found");
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }, 0),
-    [],
-  );
+  const loadDeliveryById = useCallback(async (inputId: string) => {
+    setLoading(true);
+    await fetchJson<IDelivery>(
+      `${import.meta.env.VITE_APP_API_URL}/api/delivery/${inputId}`,
+    )
+      .then((data) => {
+        setDelivery(data);
+      })
+      .catch(() => {
+        toast.error("No delivery found");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
   useEffect(() => {
     onLoaded?.(delivery);
