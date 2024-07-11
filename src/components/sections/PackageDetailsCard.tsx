@@ -1,7 +1,8 @@
 import IPackage from "@/interfaces/IPackage";
-import Card from "../ui/Card";
-import InfoItem from "../ui/InfoItem";
 import { User } from "lucide-react";
+import ItemId from "@/components/ItemId";
+import Card from "@/components/ui/Card";
+import InfoItem from "@/components/ui/InfoItem";
 
 export default function PackageDetailsCard({ data }: { data: IPackage }) {
   return (
@@ -10,7 +11,7 @@ export default function PackageDetailsCard({ data }: { data: IPackage }) {
         Package Details
       </h2>
       <div className="flex flex-col gap-3">
-        <InfoItem label="ID" value={data._id} />
+        <InfoItem label="ID" value={<ItemId value={data._id} />} />
         <InfoItem label="Description" value={data.description} />
         <div className="grid grid-cols-2 gap-3">
           <InfoItem label="Weight" value={`${data.weight} grams`} />

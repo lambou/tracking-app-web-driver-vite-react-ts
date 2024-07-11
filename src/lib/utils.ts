@@ -22,3 +22,8 @@ export function fetchJson<ResponseType extends any = any>(url: string, opts?: Re
         }
     })
 }
+
+export function dateToLocale(input: any) {
+    const date = new Date(input);
+    return `${date.toLocaleDateString('fr-FR', { dateStyle: "long" })} - ${date.toLocaleTimeString('fr-FR', { timeStyle: "medium" })}`
+}

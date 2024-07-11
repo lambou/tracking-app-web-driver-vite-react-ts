@@ -1,7 +1,8 @@
 import IDelivery from "@/interfaces/IDelivery";
-import Card from "../ui/Card";
-import InfoItem from "../ui/InfoItem";
-import { cn } from "@/lib/utils";
+import { cn, dateToLocale } from "@/lib/utils";
+import ItemId from "@/components/ItemId";
+import Card from "@/components/ui/Card";
+import InfoItem from "@/components/ui/InfoItem";
 
 export default function DeliveryDetailsCard({ data }: { data: IDelivery }) {
   return (
@@ -10,7 +11,7 @@ export default function DeliveryDetailsCard({ data }: { data: IDelivery }) {
         Delivery Details
       </h2>
       <div className="flex flex-col gap-3">
-        <InfoItem label="ID" value={data._id} />
+        <InfoItem label="ID" value={<ItemId value={data._id} />} />
         <InfoItem
           label="Status"
           value={
@@ -37,32 +38,18 @@ export default function DeliveryDetailsCard({ data }: { data: IDelivery }) {
           <InfoItem
             label="Start time"
             value={
-              data.start_time
-                ? new Date(data.start_time).toLocaleDateString("fr-FR", {
-                    dateStyle: "full",
-                  })
-                : "No defined"
+              data.start_time ? dateToLocale(data.start_time) : "No defined"
             }
           />
           <InfoItem
             label="Pickup Time"
             value={
-              data.pickup_time
-                ? new Date(data.pickup_time).toLocaleDateString("fr-FR", {
-                    dateStyle: "full",
-                  })
-                : "No defined"
+              data.pickup_time ? dateToLocale(data.pickup_time) : "No defined"
             }
           />
           <InfoItem
             label="End Time"
-            value={
-              data.end_time
-                ? new Date(data.end_time).toLocaleDateString("fr-FR", {
-                    dateStyle: "full",
-                  })
-                : "No defined"
-            }
+            value={data.end_time ? dateToLocale(data.end_time) : "No defined"}
           />
         </div>
       </div>
