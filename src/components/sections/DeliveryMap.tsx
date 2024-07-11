@@ -1,5 +1,6 @@
 import IPackage from "@/interfaces/IPackage";
 import { cn } from "@/lib/utils";
+import { Icon } from "leaflet";
 import { Car, House } from "lucide-react";
 import {
   MapContainer,
@@ -32,7 +33,16 @@ export default function DeliveryMap({
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={packageData.from_location}>
+      <Marker
+        position={packageData.from_location}
+        icon={
+          new Icon({
+            iconUrl: `/house-icon.png`,
+            className: "inline-flex items-center justify-center",
+            iconSize: [40, 40],
+          })
+        }
+      >
         <Popup closeButton={false} autoPan>
           <span className="flex flex-col items-center justify-center gap-1 w-full">
             <span className="flex items-center gap-1 text-blue-500 font-bold">
@@ -48,7 +58,17 @@ export default function DeliveryMap({
           </span>
         </Popup>
       </Marker>
-      <Marker position={packageData.to_location} autoPan>
+      <Marker
+        position={packageData.to_location}
+        autoPan
+        icon={
+          new Icon({
+            iconUrl: `/house-icon.png`,
+            className: "inline-flex items-center justify-center",
+            iconSize: [40, 40],
+          })
+        }
+      >
         <Popup closeButton={false}>
           <span className="flex flex-col items-center justify-center gap-1 w-full">
             <span className="flex items-center gap-1 text-blue-500 font-bold">
@@ -65,7 +85,16 @@ export default function DeliveryMap({
         </Popup>
       </Marker>
       {deliveryPosition && (
-        <Marker position={deliveryPosition}>
+        <Marker
+          position={deliveryPosition}
+          icon={
+            new Icon({
+              iconUrl: `/driver-icon.png`,
+              className: "inline-flex items-center justify-center",
+              iconSize: [40, 40],
+            })
+          }
+        >
           <Popup closeButton={false}>
             <span className="flex flex-col items-center justify-center gap-2 w-full">
               <Car size={32} className="text-green-500" />
